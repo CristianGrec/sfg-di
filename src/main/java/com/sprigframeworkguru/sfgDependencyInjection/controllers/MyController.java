@@ -2,7 +2,7 @@ package com.sprigframeworkguru.sfgDependencyInjection.controllers;
 
 import com.sprigframeworkguru.sfgDependencyInjection.services.GreetingsService;
 import org.springframework.stereotype.Controller;
-
+//flag
 @Controller
 public class MyController {
 
