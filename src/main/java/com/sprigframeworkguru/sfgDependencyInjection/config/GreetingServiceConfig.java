@@ -1,16 +1,26 @@
 package com.sprigframeworkguru.sfgDependencyInjection.config;
 
 import com.otherservices.FactoryExample;
+import com.sprigframeworkguru.sfgDependencyInjection.datasource.FakeDataSource;
 import com.sprigframeworkguru.sfgDependencyInjection.repositories.EnglishGreetingRepository;
 import com.sprigframeworkguru.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import com.sprigframeworkguru.sfgDependencyInjection.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
 
+@PropertySource("classpath:datasource.properties")
+@ImportResource("classpath:diConfig.xml")
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    FakeDataSource fakeDataSource(@Value("${guru.username}")String username,@Value("${guru.password}") String pass,@Value("${guru.jdbcurl}") String jdbbcUrl){
+        FakeDataSource fakeDataSource =  new FakeDataSource();
+        fakeDataSource.setUser(username);
+        fakeDataSource.setPass(pass);
+        fakeDataSource.setJdbcUrl(jdbbcUrl);
+        return fakeDataSource;
+    }
 
     @Bean
     FactoryExample greetingsFactory(){

@@ -1,13 +1,14 @@
 package com.sprigframeworkguru.sfgDependencyInjection;
 
 import com.sprigframeworkguru.sfgDependencyInjection.controllers.*;
+import com.sprigframeworkguru.sfgDependencyInjection.datasource.FakeDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 
-@ImportResource("classpath:diConfig.xml")
+
 @ComponentScan(basePackages = {"com/otherservices","com.sprigframeworkguru.sfgDependencyInjection"})
 @SpringBootApplication
 public class DependencyInjectionApplication {
@@ -35,6 +36,11 @@ public class DependencyInjectionApplication {
 		System.out.println("------ConstructorInjected------");
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
+
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUser());
+		System.out.println(fakeDataSource.getPass());
+		System.out.println(fakeDataSource.getJdbcUrl());
 	}
 
 }
