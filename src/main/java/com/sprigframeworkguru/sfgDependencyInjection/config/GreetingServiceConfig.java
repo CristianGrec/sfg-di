@@ -1,5 +1,8 @@
 package com.sprigframeworkguru.sfgDependencyInjection.config;
 
+import com.otherservices.FactoryExample;
+import com.sprigframeworkguru.sfgDependencyInjection.repositories.EnglishGreetingRepository;
+import com.sprigframeworkguru.sfgDependencyInjection.repositories.EnglishGreetingRepositoryImpl;
 import com.sprigframeworkguru.sfgDependencyInjection.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,10 +12,14 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class GreetingServiceConfig {
 
+    @Bean
+    FactoryExample greetingsFactory(){
+        return new FactoryExample();
+    }
     //aici numele beanului in context se ia by default numele acestei metode si cu litera mica la inceput
     @Bean
-    SetterGreetingService setterGreetingService(){
-        return new SetterGreetingService();
+    GreetingsService setterGreetingService(FactoryExample factoryExample){
+        return factoryExample.getGreetingsService("yy");
     }
 
     @Bean
@@ -28,8 +35,13 @@ public class GreetingServiceConfig {
 
     @Profile("EN")
     @Bean
-    public I18nEnglishGreetingService i18nService(){
-        return new I18nEnglishGreetingService();
+    public I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository){
+        return new I18nEnglishGreetingService(englishGreetingRepository);
+    }
+
+    @Bean
+    EnglishGreetingRepositoryImpl englishGreetingRepository(){
+        return new EnglishGreetingRepositoryImpl();
     }
 
     @Profile({"ES","default"})

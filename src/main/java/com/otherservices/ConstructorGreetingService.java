@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 
-@Service
+//@Service
 public class ConstructorGreetingService implements GreetingsService {
 
     @Override
