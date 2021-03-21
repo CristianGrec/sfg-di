@@ -4,7 +4,9 @@ import com.sprigframeworkguru.sfgDependencyInjection.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-//flag
+import org.springframework.context.annotation.ComponentScan;
+
+@ComponentScan(basePackages = {"com/otherservices","com.sprigframeworkguru.sfgDependencyInjection"})
 @SpringBootApplication
 public class DependencyInjectionApplication {
 

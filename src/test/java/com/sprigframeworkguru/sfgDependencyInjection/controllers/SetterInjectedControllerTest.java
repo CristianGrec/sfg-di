@@ -1,6 +1,6 @@
 package com.sprigframeworkguru.sfgDependencyInjection.controllers;
 
-import com.sprigframeworkguru.sfgDependencyInjection.services.ConstructorGreetingService;
+import com.otherservices.ConstructorGreetingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
